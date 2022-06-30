@@ -13,14 +13,21 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<App />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="*" element={<NotFound404 />} />
-      </Routes>
-    </BrowserRouter>
+    <div>
+      <nav>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/contact">Contact</a></li>
+        </ul>
+      </nav>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="*" element={<NotFound404 />} />
+        </Routes>
+      </BrowserRouter>
+    </div>
   </React.StrictMode>
 );
 
