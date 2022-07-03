@@ -1,13 +1,12 @@
-import React, { Suspense } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
+import './core/imports.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import reportWebVitals from './reportWebVitals';
-
-const Contact = React.lazy(() => import('./views/Contact.view'));
-const Home = React.lazy(() => import('./views/Home.view'));
-const NotFound404 = React.lazy(() => import('./views/NotFound404.view'));
-const NavBar = React.lazy(() => import('./components/NavBar'));
+import Contact from './app/views/Contact.view';
+import Home from './app/views/Home.view';
+import NotFound404 from './app/views/NotFound404.view';
+import NavBar from './app/components/NavBar';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -17,15 +16,11 @@ root.render(
     <div>
       <BrowserRouter>
         <NavBar />
-        <Suspense fallback={<div>
-          carregando...
-        </div>}>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="*" element={<NotFound404 />} />
-          </Routes>
-        </Suspense>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="*" element={<NotFound404 />} />
+        </Routes>
       </BrowserRouter>
     </div>
   </React.StrictMode>
