@@ -5,7 +5,7 @@ export default function NavBar() {
   return <>
     <List>
       <Item><NavLink to="/">Home</NavLink></Item>
-      <Item><NavLink to="/contact">Contact</NavLink></Item>
+      <Item><NavLink to="/editors">Editores</NavLink></Item>
     </List>
   </>
 }

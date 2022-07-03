@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './core/imports.css';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import reportWebVitals from './reportWebVitals';
-import Contact from './app/views/Contact.view';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import EditorsListView from './app/views/EditorsList.view';
 import Home from './app/views/Home.view';
 import NotFound404 from './app/views/NotFound404.view';
 import GlobalStyles from './core/globalStyles';
+import './core/imports.css';
+import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -16,7 +16,7 @@ root.render(
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/contact" element={<Contact />} />
+        <Route path="/editors" element={<EditorsListView />} />
         <Route path="*" element={<NotFound404 />} />
       </Routes>
     </BrowserRouter>
