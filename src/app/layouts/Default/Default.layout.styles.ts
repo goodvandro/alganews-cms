@@ -35,4 +35,5 @@ export const FeatureContent = styled.section`
   display: flex;
   flex-direction: column;
   gap: 32px;
+  padding-bottom: 32px;
 `

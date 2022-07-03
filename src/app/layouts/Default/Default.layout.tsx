@@ -19,9 +19,6 @@ function DefaultLayout({ children }: DefaultLayoutProps) {
         </DL.Navigation>
         <DL.FeatureContent>
           {children}
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam pariatur adipisci sit, soluta alias quidem, incidunt mollitia doloribus necessitatibus autem nulla! Soluta dolor nam, autem magni adipisci sequi nisi voluptas?
-          </p>
         </DL.FeatureContent>
         <DL.Aside>
           <SessionController
