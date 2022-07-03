@@ -27,7 +27,7 @@ export const Circle = styled.circle`
 `
 
 export const CircleBG = styled.circle.attrs({
-  fill: '#fff',
+  fill: 'none',
 })``
 
 export const Percentage = styled.span<PercentageProps>`
