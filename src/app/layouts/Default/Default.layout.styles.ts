@@ -23,7 +23,11 @@ export const Main = styled.main`
   gap: 16px;
 `
 
-export const Navigation = styled.nav``
+export const Navigation = styled.nav`
+  display: flex;
+  padding-right: 32px;
+  justify-content: flex-end;
+`
 
 export const Aside = styled.aside``
 
