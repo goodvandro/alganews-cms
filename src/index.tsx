@@ -6,23 +6,21 @@ import reportWebVitals from './reportWebVitals';
 import Contact from './app/views/Contact.view';
 import Home from './app/views/Home.view';
 import NotFound404 from './app/views/NotFound404.view';
-import NavBar from './app/components/NavBar';
+import GlobalStyles from './core/globalStyles';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <div>
-      <BrowserRouter>
-        <NavBar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="*" element={<NotFound404 />} />
-        </Routes>
-      </BrowserRouter>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="*" element={<NotFound404 />} />
+      </Routes>
+    </BrowserRouter>
+    <GlobalStyles />
   </React.StrictMode>
 );
 
