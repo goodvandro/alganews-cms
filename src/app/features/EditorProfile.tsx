@@ -49,7 +49,6 @@ function EditorProfile(props: EditorProfileProps) {
         <ValueDescriptor color={'primary'} value={545623.23} description={'Ganhos no total'} isCurrency />
       </EditorEarnings>
     }
-
   </EditorProfileWrapper>
 }
 
