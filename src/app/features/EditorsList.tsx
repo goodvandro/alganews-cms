@@ -3,11 +3,11 @@ import Profile from "../components/Profile";
 
 export default function EditorsList() {
   return <EditorListWrapper>
-    <Profile name="Evandro Monteiro" description="editor há muito tempo" />
-    <Profile name="Evandro Monteiro" description="editor há muito tempo" />
-    <Profile name="Evandro Monteiro" description="editor há muito tempo" />
-    <Profile name="Evandro Monteiro" description="editor há muito tempo" />
-    <Profile name="Evandro Monteiro" description="editor há muito tempo" />
+    <Profile editorId={1} name="Evandro Monteiro" description="editor há muito tempo" />
+    <Profile editorId={2} name="Evandro Monteiro" description="editor há muito tempo" />
+    <Profile editorId={3} name="Evandro Monteiro" description="editor há muito tempo" />
+    <Profile editorId={4} name="Evandro Monteiro" description="editor há muito tempo" />
+    <Profile editorId={5} name="Evandro Monteiro" description="editor há muito tempo" />
   </EditorListWrapper>
 }
 

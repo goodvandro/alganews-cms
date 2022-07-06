@@ -3,6 +3,7 @@ import Logo from '../../components/Logo';
 import NavBar from '../../components/NavBar';
 import SessionController from '../../components/SessionController';
 import * as DL from './Default.layout.styles';
+import info from '../../../core/utils/info';
 
 interface DefaultLayoutProps {
   children: React.ReactNode;
@@ -28,7 +29,12 @@ function DefaultLayout({ children }: DefaultLayoutProps) {
             onLogout={() => {
               confirm({
                 title: 'Deseja realmente sair?',
-                onConfirm: () => window.alert('Você saiu!'),
+                onConfirm: () => {
+                  info({
+                    title: 'Saiu!',
+                    description: 'Você será redirecionado para a página de login'
+                  })
+                },
                 onCancel: () => window.alert('Você cancelou!'),
               });
             }}

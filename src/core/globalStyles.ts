@@ -18,7 +18,7 @@ export default createGlobalStyle`
     background-color: ${transparentize(0.2, '#274060')}
   }
 
-  .confirm-overlay {
+  .info-overlay {
     background-color: ${transparentize(0.2, '#f3f8fa')}
   }
 `
