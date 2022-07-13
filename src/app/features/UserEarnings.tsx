@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import CircleChart from "../components/CircleChart";
 import ValueDescriptor from "../components/ValueDescriptor/ValueDescriptor";
 
 export default function UserEarnings() {

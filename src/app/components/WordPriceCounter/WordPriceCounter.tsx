@@ -1,7 +1,4 @@
-
-
-import { useState } from 'react'
-import * as WPC from './WordPriceCounter.styles'
+import * as WPC from './WordPriceCounter.styles';
 
 export interface WordPriceCounterProps {
   wordsCount: number;

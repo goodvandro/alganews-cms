@@ -44,8 +44,6 @@ export interface ChartProps {
   title: string,
 }
 
-const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
-
 export default function Chart({ data, title }: ChartProps) {
   return <ChartWrapper style={{ width: '100%' }}>
     <div style={{ marginBottom: 16 }}>

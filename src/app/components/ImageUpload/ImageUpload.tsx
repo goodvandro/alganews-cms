@@ -1,6 +1,7 @@
 import { mdiUpload } from '@mdi/js'
 import Icon from '@mdi/react'
 import { ChangeEvent, useState } from 'react'
+import FileService from '../../../sdk/services/File.service'
 import Button from '../Button/Button'
 import * as UI from './ImageUpload.styles'
 
@@ -11,14 +12,17 @@ export interface ImageUploadProps {
 function ImageUpload(props: ImageUploadProps) {
   const [filePreview, setFilePreview] = useState<string | null>(null)
 
-  function handleChange(e: ChangeEvent<HTMLInputElement>) {
-    const file = e.target.files![0]
+  function handleChange(e: ChangeEvent<HTMLInputElement>): void {
+    const file: File = e.target.files![0]
 
     if (file) {
-      const reader = new FileReader()
+      const reader: FileReader = new FileReader()
 
-      reader.addEventListener('load', (e) => {
+      reader.addEventListener('load', async (e: ProgressEvent<FileReader>)
+        : Promise<void> => {
         setFilePreview(String(e.target?.result))
+        const imageUrl: string = await FileService.upload(file)
+        console.log(imageUrl)
       })
 
       reader.readAsDataURL(file)
@@ -31,7 +35,7 @@ function ImageUpload(props: ImageUploadProps) {
         <Button
           variant={'primary'}
           label={'Remover imagem'}
-          onClick={() => setFilePreview(null)}
+          onClick={(): void => setFilePreview(null)}
         />
       </UI.ImagePreview>
     </UI.ImagePreviewWrapper>
