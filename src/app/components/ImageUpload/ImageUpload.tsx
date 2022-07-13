@@ -6,7 +6,8 @@ import Button from '../Button/Button'
 import * as UI from './ImageUpload.styles'
 
 export interface ImageUploadProps {
-  label: string
+  label: string,
+  onImageUpload: (imageUrl: string) => any
 }
 
 function ImageUpload(props: ImageUploadProps) {
@@ -22,7 +23,7 @@ function ImageUpload(props: ImageUploadProps) {
         : Promise<void> => {
         setFilePreview(String(e.target?.result))
         const imageUrl: string = await FileService.upload(file)
-        console.log(imageUrl)
+        props.onImageUpload(imageUrl)
       })
 
       reader.readAsDataURL(file)
