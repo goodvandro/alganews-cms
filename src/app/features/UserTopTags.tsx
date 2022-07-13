@@ -11,7 +11,7 @@ export default function UserTopTags() {
     MetricService
       .getTop3Tags()
       .then(setTopTags)
-  })
+  }, [])
 
   return <UserTopTagsWrapper>
     {
