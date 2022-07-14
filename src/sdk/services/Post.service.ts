@@ -5,7 +5,6 @@ import generateQueryString from "../utils/generateQueryString";
 class PostService extends Service {
   static getAllPosts(search: Post.Query): Promise<Post.Paginated> {
     const queryString: string = generateQueryString(search)
-    console.log(queryString)
     return this.Http
       .get<Post.Paginated>('/posts'.concat(queryString))
       .then(this.getData)
