@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
+import withBoundary from "../../core/hoc/withBoundary";
 import { User } from "../../sdk/@types";
 import UserService from "../../sdk/services/User.service";
 import ValueDescriptor from "../components/ValueDescriptor/ValueDescriptor";
 
-export default function UserEarnings() {
+function UserEarnings() {
   const [user, setUser] = useState<User.Detailed>()
   const [error, setError] = useState<Error>()
 
@@ -28,6 +29,8 @@ export default function UserEarnings() {
     <ValueDescriptor color="default" description="Total de palavras" value={user?.metrics.lifetimeWords} />
   </UserEarningsWrapper>
 }
+
+export default withBoundary(UserEarnings, 'ganhos do utilizador')
 
 const UserEarningsWrapper = styled.div`
   display: grid;

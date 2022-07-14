@@ -3,11 +3,12 @@ import Icon from "@mdi/react"
 import { format } from "date-fns"
 import { useEffect, useMemo, useState } from "react"
 import { Column, useTable } from "react-table"
+import withBoundary from "../../core/hoc/withBoundary"
 import { Post } from "../../sdk/@types"
 import PostService from "../../sdk/services/Post.service"
 import Table from "../components/Table/Table"
 
-export default function PostsList() {
+function PostsList() {
   const [posts, setPosts] = useState<Post.Paginated>()
   const [error, setError] = useState<Error>()
 
@@ -95,3 +96,5 @@ export default function PostsList() {
     instance={instance}
   />
 }
+
+export default withBoundary(PostsList, 'lista de posts')
