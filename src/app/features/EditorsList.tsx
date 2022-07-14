@@ -7,12 +7,17 @@ import Profile from "../components/Profile";
 
 export default function EditorsList() {
   const [editors, setEditors] = useState<User.EditorSummary[]>([]);
+  const [error, setError] = useState<Error>()
 
   useEffect(() => {
     UserService
       .getAllEditors()
       .then(setEditors)
+      .catch(error => setError(new Error(error.message)))
   }, [])
+
+  if (error)
+    throw error
 
   return <EditorListWrapper>
     {

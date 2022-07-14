@@ -9,6 +9,7 @@ import Table from "../components/Table/Table"
 
 export default function PostsList() {
   const [posts, setPosts] = useState<Post.Paginated>()
+  const [error, setError] = useState<Error>()
 
   useEffect(() => {
     PostService
@@ -19,8 +20,11 @@ export default function PostsList() {
         sort: ['createdAt', 'desc']
       })
       .then(setPosts)
+      .catch(error => setError(new Error(error.message)))
   }, [])
 
+  if (error)
+    throw error
 
   const columns = useMemo<Column<Post.Summary>[]>(
     () => [
