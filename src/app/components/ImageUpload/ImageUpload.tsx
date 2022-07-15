@@ -3,6 +3,7 @@ import Icon from '@mdi/react'
 import { ChangeEvent, useState } from 'react'
 import FileService from '../../../sdk/services/File.service'
 import Button from '../Button/Button'
+import Loading from '../Loading'
 import * as UI from './ImageUpload.styles'
 
 export interface ImageUploadProps {
@@ -12,6 +13,7 @@ export interface ImageUploadProps {
 
 function ImageUpload(props: ImageUploadProps) {
   const [filePreview, setFilePreview] = useState<string | null>(null)
+  const [pushing, setPushing] = useState(false)
 
   function handleChange(e: ChangeEvent<HTMLInputElement>): void {
     const file: File = e.target.files![0]
@@ -21,9 +23,14 @@ function ImageUpload(props: ImageUploadProps) {
 
       reader.addEventListener('load', async (e: ProgressEvent<FileReader>)
         : Promise<void> => {
-        setFilePreview(String(e.target?.result))
-        const imageUrl: string = await FileService.upload(file)
-        props.onImageUpload(imageUrl)
+        try {
+          setPushing(true)
+          setFilePreview(String(e.target?.result))
+          const imageUrl: string = await FileService.upload(file)
+          props.onImageUpload(imageUrl)
+        } finally {
+          setPushing(false)
+        }
       })
 
       reader.readAsDataURL(file)
@@ -43,6 +50,7 @@ function ImageUpload(props: ImageUploadProps) {
   }
 
   return <UI.Wrapper>
+    <Loading show={pushing} />
     <UI.Label>
       <Icon
         size={'24px'}
