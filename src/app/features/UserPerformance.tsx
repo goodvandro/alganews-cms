@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import Skeleton from "react-loading-skeleton"
 import withBoundary from "../../core/hoc/withBoundary"
 import transformEditorMonthlyEarningsIntoChartJs from "../../core/utils/transformEditorMonthlyEarningsIntoChartJs"
 import MetricService from "../../sdk/services/Metric.service"
@@ -22,7 +23,9 @@ function UserPerformance() {
     throw error
 
   if (!editorEarnings)
-    return null
+    return <div>
+      <Skeleton height={227} />
+    </div>
 
   return <Chart
     title="Média de performance nos últimos 12 meses"
