@@ -1,4 +1,5 @@
 import usePageTitle from "../../core/hooks/usePageTitle"
+import Loading from "../components/Loading"
 import PostsList from "../features/PostsList"
 import UserEarnings from "../features/UserEarnings"
 import UserPerformance from "../features/UserPerformance"
@@ -9,6 +10,7 @@ export default function Home() {
   usePageTitle('Home')
 
   return <DefaultLayout>
+    <Loading />
     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', alignItems: 'center', gap: 32 }}>
       <UserTopTags />
       <UserEarnings />
