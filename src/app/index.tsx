@@ -1,11 +1,11 @@
-import { useEffect } from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import info from "../core/utils/info";
-import EditorProfileView from "./views/EditorProfile.view";
-import EditorsListView from "./views/EditorsList.view";
-import Home from "./views/Home.view";
-import NotFound404 from "./views/NotFound404.view";
-import PostCreateView from "./views/PostCreate.view";
+import { useEffect } from "react"
+import { BrowserRouter, Route, Routes } from "react-router-dom"
+import info from "../core/utils/info"
+import EditorProfileView from "./views/EditorProfile.view"
+import EditorsListView from "./views/EditorsList.view"
+import Home from "./views/Home.view"
+import NotFound404 from "./views/NotFound404.view"
+import PostCreateView from "./views/PostCreate.view"
 
 export default function App() {
   useEffect(() => {
