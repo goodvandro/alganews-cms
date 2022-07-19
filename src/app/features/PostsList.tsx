@@ -23,7 +23,7 @@ function PostsList() {
     PostService
       .getAllPosts({
         page,
-        size: 2,
+        size: 7,
         showAll: true,
         sort: ['createdAt', 'desc']
       })
