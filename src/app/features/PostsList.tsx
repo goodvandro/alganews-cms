@@ -11,6 +11,7 @@ import Skeleton from 'react-loading-skeleton'
 import Loading from "../components/Loading"
 import PostPreview from "./PostPreview"
 import modal from "../../core/utils/modal"
+import PostTitleAnchor from "../components/PostTitleAnchor"
 
 function PostsList() {
   const [posts, setPosts] = useState<Post.Paginated>()
@@ -52,7 +53,8 @@ function PostsList() {
               textAlign: 'left',
               display: 'flex',
               gap: 8,
-              alignItems: 'center'
+              alignItems: 'center',
+              maxWidth: 270,
             }}>
             <img
               width={24}
@@ -61,7 +63,8 @@ function PostsList() {
               alt={props.row.original.editor.name}
               title={props.row.original.editor.name}
             />
-            <a
+            <PostTitleAnchor
+              title={props.value}
               href={`/posts/${props.row.original.id}`}
               onClick={(e) => {
                 e.preventDefault()
@@ -71,8 +74,7 @@ function PostsList() {
               }}
             >
               {props.value}
-            </a>
-            {props.value}
+            </PostTitleAnchor>
           </div>
         ),
       },
