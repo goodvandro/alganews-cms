@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components"
 import withBoundary from "../../core/hoc/withBoundary"
+import confirm from "../../core/utils/confirm";
+import info from "../../core/utils/info";
+import modal from "../../core/utils/modal";
 import { Post } from "../../sdk/@types";
 import PostService from "../../sdk/services/Post.service";
 import Button from '../components/Button/Button';
@@ -14,6 +17,20 @@ interface PostPreviewProps {
 function PostPreview(props: PostPreviewProps) {
   const [post, setPost] = useState<Post.Detailed>()
   const [loading, setLoading] = useState(false)
+
+  async function publishPost() {
+    await PostService.publishExistingPost(props.postId)
+    info({
+      title: 'Post publicado',
+      description: 'O post foi publicado com sucesso'
+    })
+  }
+
+  function reopenModal() {
+    modal({
+      children: <PostPreview postId={props.postId} />
+    })
+  }
 
   useEffect(() => {
     setLoading(true)
@@ -39,10 +56,19 @@ function PostPreview(props: PostPreviewProps) {
           <Button
             variant={'danger'}
             label={'Publicar'}
+            disabled={post.published}
+            onClick={(): void => {
+              confirm({
+                title: 'Publicar o post?',
+                onConfirm: publishPost,
+                onCancel: reopenModal,
+              })
+            }}
           />
           <Button
             variant={'primary'}
             label={'Editar'}
+            disabled={post.published}
           />
         </PostPreviewActions>
       </PostPreviewHeading>
