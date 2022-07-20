@@ -69,6 +69,7 @@ function PostPreview(props: PostPreviewProps) {
             variant={'primary'}
             label={'Editar'}
             disabled={post.published}
+            onClick={() => window.location.pathname = `/posts/edit/${props.postId}`}
           />
         </PostPreviewActions>
       </PostPreviewHeading>

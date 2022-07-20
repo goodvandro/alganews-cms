@@ -3,7 +3,7 @@ import ImageUpload from "../components/ImageUpload"
 import Input from "../components/Input/Input"
 import MarkdownEditor from "../components/MarkdownEditor"
 import TagInput from "../components/TagInput"
-import { ChangeEvent, useState } from 'react'
+import { ChangeEvent, useEffect, useState } from 'react'
 import { Tag } from "react-tag-input"
 import WordPriceCounter from "../components/WordPriceCounter"
 import Button from "../components/Button/Button"
@@ -14,7 +14,11 @@ import { Post } from "../../sdk/@types"
 import Loading from "../components/Loading"
 import { useNavigate } from "react-router-dom"
 
-export default function PostForm() {
+interface PostFormProps {
+  postId?: number
+}
+
+export default function PostForm(props: PostFormProps) {
   const navigate = useNavigate()
 
   const [tags, setTags] = useState<Tag[]>([])
@@ -24,31 +28,63 @@ export default function PostForm() {
 
   const [publishing, setPublishing] = useState(false)
 
-  async function handleFormSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault()
+  async function insertNewPost() {
+    const newPost: Post.Input = {
+      body, title, imageUrl, tags: tags.map((t: Tag): string => t.text),
+    }
 
+    await PostService.insertNewPost(newPost)
+
+    info({
+      title: 'Post salvo com sucesso!',
+      description: 'Você acabou de criar o post com sucesso',
+    })
+  }
+
+  async function updateExistingPost(postId: number) {
+    const newPost: Post.Input = {
+      body, title, imageUrl, tags: tags.map((t: Tag): string => t.text),
+    }
+
+    await PostService.updateExistingPost(postId, newPost)
+
+    info({
+      title: 'Post atualizado!',
+      description: 'Você acabou de atualizar o post com sucesso',
+    })
+  }
+
+  async function handleFormSubmit(e: React.FormEvent<HTMLFormElement>) {
     try {
+      e.preventDefault()
       setPublishing(true)
 
-      const newPost: Post.Input = {
-        body,
-        title,
-        tags: tags.map((t: Tag): string => t.text),
-        imageUrl,
-      }
+      props.postId
+        ? await updateExistingPost(props.postId)
+        : await insertNewPost()
 
-      const insertedPost: Post.Detailed = await PostService
-        .insertNewPost(newPost)
-
-      info({
-        title: 'Post salvo com sucesso!',
-        description: 'Você acabou de criar o post com o id ' + insertedPost.id,
-      })
       navigate('/')
     } finally {
       setPublishing(false)
     }
   }
+
+  function fetchPost(postId: number) {
+    PostService
+      .getExistingPosts(postId)
+      .then((post: Post.Detailed): void => {
+        setTitle(post.title)
+        setImageUrl(post.imageUrls.default)
+        setBody(post.body)
+        setTags(post.tags.map(tag => ({ id: tag, text: tag })))
+      })
+  }
+
+  useEffect(() => {
+    if (props.postId) {
+      fetchPost(props.postId)
+    }
+  }, [props.postId])
 
   return <PostFormWrapper onSubmit={handleFormSubmit}>
     <Loading show={publishing} />
@@ -61,8 +97,12 @@ export default function PostForm() {
     <ImageUpload
       onImageUpload={setImageUrl}
       label="Thumbnail do post"
+      preview={imageUrl}
     />
-    <MarkdownEditor onChange={setBody} />
+    <MarkdownEditor
+      onChange={setBody}
+      value={body}
+    />
     <TagInput
       tags={tags}
       onAdd={(tag: Tag): void => setTags([...tags, tag])}
