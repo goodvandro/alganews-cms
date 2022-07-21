@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit"
+import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { Post } from "goodvandro-alganews-sdk"
 
 interface PostSliceState {
@@ -18,7 +18,12 @@ const initialState: PostSliceState = {
 const postSlice = createSlice({
   name: "post",
   initialState,
-  reducers: {},
+  reducers: {
+    addPost(state, action: PayloadAction<Post.Summary>) {
+      state.paginated?.content?.push(action.payload)
+    }
+  },
 })
 
 export const postReducer = postSlice.reducer
+export const { addPost } = postSlice.actions
