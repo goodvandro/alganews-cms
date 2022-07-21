@@ -1,7 +1,7 @@
 import { mdiUpload } from '@mdi/js'
 import Icon from '@mdi/react'
+import { FileService } from 'goodvandro-alganews-sdk'
 import { ChangeEvent, useEffect, useState } from 'react'
-import FileService from '../../../sdk/services/File.service'
 import Button from '../Button/Button'
 import Loading from '../Loading'
 import * as UI from './ImageUpload.styles'

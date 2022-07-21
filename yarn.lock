@@ -7752,6 +7752,15 @@ globby@^9.2.0:
     pify "^4.0.1"
     slash "^2.0.0"
 
+goodvandro-alganews-sdk@2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/goodvandro-alganews-sdk/-/goodvandro-alganews-sdk-2.0.0.tgz#69f7dfeac12afd941e7cd3683793e9672e4027c2"
+  integrity sha512-RUyggn8sR1Tp6yqXM4+B1MmHjn4f/zriqYBdAMoT7xAwEaOeByahEe8WWZsHJVhGk8cSkVhTFqNaszTeKtZ1eA==
+  dependencies:
+    axios "^0.27.2"
+    date-fns "^2.28.0"
+    uuid "^8.3.2"
+
 graceful-fs@^4.1.11, graceful-fs@^4.1.15, graceful-fs@^4.1.2, graceful-fs@^4.1.6, graceful-fs@^4.1.9, graceful-fs@^4.2.0, graceful-fs@^4.2.4, graceful-fs@^4.2.6, graceful-fs@^4.2.9:
   version "4.2.10"
   resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.2.10.tgz#147d3a006da4ca3ce14728c7aefc287c367d7a6c"
