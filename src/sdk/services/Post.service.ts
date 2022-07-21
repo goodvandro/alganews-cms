@@ -33,6 +33,18 @@ class PostService extends Service {
       .put<Post.Detailed>(`/posts/${postId}`, post)
       .then(this.getData)
   }
+
+  static deleteExistingPost(postId: number): Promise<{}> {
+    return this.Http
+      .delete<{}>(`/posts/${postId}`)
+      .then(this.getData);
+  }
+
+  static deactivateExistingPost(postId: number): Promise<{}> {
+    return this.Http
+      .delete<{}>(`/posts/${postId}/activation`)
+      .then(this.getData);
+  }
 }
 
 export default PostService;

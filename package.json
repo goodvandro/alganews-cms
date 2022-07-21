@@ -16,7 +16,7 @@
     "chart.js": "2.9.4",
     "date-fns": "^2.28.0",
     "faker": "5.5.3",
-    "goodvandro-alganews-sdk": "2.1.0",
+    "goodvandro-alganews-sdk": "2.2.0",
     "markdown-it": "^13.0.1",
     "polished": "^4.2.2",
     "react": "^18.0.0",
