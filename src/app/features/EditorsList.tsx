@@ -1,9 +1,7 @@
+import { getEditorDescription, User, UserService } from 'goodvandro-alganews-sdk';
 import { useEffect, useState } from 'react';
 import Skeleton from 'react-loading-skeleton';
 import styled from "styled-components";
-import { User } from "../../sdk/@types";
-import UserService from "../../sdk/services/User.service";
-import getEditorDescription from '../../sdk/utils/getEditorDescription';
 import Profile from "../components/Profile";
 
 export default function EditorsList() {

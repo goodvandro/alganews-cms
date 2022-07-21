@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import withBoundary from "../../core/hoc/withBoundary";
-import { User } from "../../sdk/@types";
-import UserService from "../../sdk/services/User.service";
 import ValueDescriptor from "../components/ValueDescriptor/ValueDescriptor";
 import Skeleton from "react-loading-skeleton";
+import { User, UserService } from "goodvandro-alganews-sdk";
 
 function UserEarnings() {
   const [editorEarning, setEditorEarning] = useState<User.Detailed>()

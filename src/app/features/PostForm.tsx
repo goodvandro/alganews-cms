@@ -9,10 +9,9 @@ import WordPriceCounter from "../components/WordPriceCounter"
 import Button from "../components/Button/Button"
 import countWordsInMarkdown from "../../core/utils/countWordsInMarkdown"
 import info from '../../core/utils/info'
-import PostService from "../../sdk/services/Post.service"
-import { Post } from "../../sdk/@types"
 import Loading from "../components/Loading"
 import { useNavigate } from "react-router-dom"
+import { Post, PostService } from "goodvandro-alganews-sdk"
 
 interface PostFormProps {
   postId?: number

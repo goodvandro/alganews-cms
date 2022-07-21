@@ -4,14 +4,13 @@ import { format } from "date-fns"
 import { useEffect, useMemo, useState } from "react"
 import { Column, usePagination, useTable } from "react-table"
 import withBoundary from "../../core/hoc/withBoundary"
-import { Post } from "../../sdk/@types"
-import PostService from "../../sdk/services/Post.service"
 import Table from "../components/Table/Table"
 import Skeleton from 'react-loading-skeleton'
 import Loading from "../components/Loading"
 import PostPreview from "./PostPreview"
 import modal from "../../core/utils/modal"
 import PostTitleAnchor from "../components/PostTitleAnchor"
+import { Post, PostService } from 'goodvandro-alganews-sdk';
 
 function PostsList() {
   const [posts, setPosts] = useState<Post.Paginated>()
