@@ -1,5 +1,5 @@
 import { useEffect } from "react"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import usePageTitle from "../../core/hooks/usePageTitle"
 import PostsList from "../features/PostsList"
 import UserEarnings from "../features/UserEarnings"
@@ -7,6 +7,8 @@ import UserPerformance from "../features/UserPerformance"
 import UserTopTags from "../features/UserTopTags"
 import DefaultLayout from '../layouts/Default/Default.layout'
 import { addPost } from "../../core/store/Post.slice"
+import { RootState } from "../../core/store"
+import selectPaginatedPosts from "../../core/selectors/selectPaginatedPosts"
 
 const fakePost = {
   id: 42,
@@ -51,13 +53,25 @@ export default function Home() {
   usePageTitle('Home')
 
   const dispatch = useDispatch()
+  const paginatedPosts = useSelector(selectPaginatedPosts)
 
-  useEffect(() => {
-    dispatch(addPost(fakePost))
-  }, [dispatch])
+  useEffect(() => { }, [dispatch])
 
   return <DefaultLayout>
-    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', alignItems: 'center', gap: 32 }}>
+    <button
+      onClick={() => dispatch(addPost(fakePost))}
+    >
+      Disparar ação
+    </button>
+    {
+      paginatedPosts?.map(post => <li>{post.title}</li>)
+    }
+    <div style={{
+      display: 'grid',
+      gridTemplateColumns: '1fr 1fr',
+      alignItems: 'center',
+      gap: 32
+    }}>
       <UserTopTags />
       <UserEarnings />
     </div>
