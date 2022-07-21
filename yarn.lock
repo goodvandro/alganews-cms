@@ -7752,10 +7752,10 @@ globby@^9.2.0:
     pify "^4.0.1"
     slash "^2.0.0"
 
-goodvandro-alganews-sdk@2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/goodvandro-alganews-sdk/-/goodvandro-alganews-sdk-2.0.0.tgz#69f7dfeac12afd941e7cd3683793e9672e4027c2"
-  integrity sha512-RUyggn8sR1Tp6yqXM4+B1MmHjn4f/zriqYBdAMoT7xAwEaOeByahEe8WWZsHJVhGk8cSkVhTFqNaszTeKtZ1eA==
+goodvandro-alganews-sdk@2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/goodvandro-alganews-sdk/-/goodvandro-alganews-sdk-2.1.0.tgz#1e39f583d4854b43bbc55d030c393e933ac706cc"
+  integrity sha512-yQ6bnx658XHLtWcuAEQL0W8fSyCIqx24vVIzi1n0YpC7XTL+05GxQO+z7QnJVXsZhM91l3uP6OM129huqwA0mw==
   dependencies:
     axios "^0.27.2"
     date-fns "^2.28.0"
