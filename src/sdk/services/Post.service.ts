@@ -1,6 +1,6 @@
-import { Post } from "../@types";
-import Service from "../Service";
-import generateQueryString from "../utils/generateQueryString";
+import { Post } from "../@types"
+import Service from "../Service"
+import generateQueryString from "../utils/generateQueryString"
 
 class PostService extends Service {
   static getAllPosts(search: Post.Query): Promise<Post.Paginated> {
