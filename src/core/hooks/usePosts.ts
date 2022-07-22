@@ -1,4 +1,5 @@
 import { Post } from "goodvandro-alganews-sdk"
+import { useCallback } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import selectPaginatedPosts from "../selectors/selectPaginatedPosts"
 import selectPostsFetching from "../selectors/selectPostsFetching"
@@ -10,9 +11,12 @@ export default function usePosts() {
   const paginatedPosts = useSelector(selectPaginatedPosts)
   const loading = useSelector(selectPostsFetching)
 
-  async function fetchPosts(query: Post.Query) {
-    dispatch(PostActions.fetchPosts(query))
-  }
+  const fetchPosts = useCallback(
+    async function (query: Post.Query) {
+      dispatch(PostActions.fetchPosts(query))
+    },
+    [dispatch]
+  )
 
   return {
     paginatedPosts,

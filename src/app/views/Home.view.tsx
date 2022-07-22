@@ -1,3 +1,4 @@
+import { useEffect } from "react"
 import usePageTitle from "../../core/hooks/usePageTitle"
 import usePosts from "../../core/hooks/usePosts"
 import PostsList from "../features/PostsList"
@@ -10,14 +11,11 @@ export default function Home() {
   usePageTitle('Home')
   const { paginatedPosts, loading, fetchPosts } = usePosts()
 
+  useEffect(() => {
+    fetchPosts({ page: 1 })
+  }, [fetchPosts])
+
   return <DefaultLayout>
-    <button
-      onClick={() => {
-        fetchPosts({ page: 0, size: 5 })
-      }}
-    >
-      Disparar ação
-    </button>
     {loading ? 'Carregando...' : 'Finalizado'}
     <hr />
     {
