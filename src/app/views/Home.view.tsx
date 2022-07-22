@@ -6,8 +6,7 @@ import UserEarnings from "../features/UserEarnings"
 import UserPerformance from "../features/UserPerformance"
 import UserTopTags from "../features/UserTopTags"
 import DefaultLayout from '../layouts/Default/Default.layout'
-import { addPost } from "../../core/store/Post.slice"
-import { RootState } from "../../core/store"
+import { fetchPosts } from "../../core/store/Post.slice"
 import selectPaginatedPosts from "../../core/selectors/selectPaginatedPosts"
 
 const fakePost = {
@@ -52,14 +51,16 @@ const fakePost = {
 export default function Home() {
   usePageTitle('Home')
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch<any>()
   const paginatedPosts = useSelector(selectPaginatedPosts)
 
   useEffect(() => { }, [dispatch])
 
   return <DefaultLayout>
     <button
-      onClick={() => dispatch(addPost(fakePost))}
+      onClick={() => {
+        dispatch(fetchPosts({ page: 1 }))
+      }}
     >
       Disparar ação
     </button>
