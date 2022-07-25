@@ -4,8 +4,8 @@ import Confirm from '../../app/components/Confirm/Confirm';
 
 interface ConfirmProps {
   title: string;
-  onConfirm?: () => any
-  onCancel?: () => any
+  onConfirm?: (...args: any[]) => any
+  onCancel?: (...args: any[]) => any
 }
 
 export default function confirm(props: ConfirmProps) {

@@ -1,12 +1,11 @@
-import { Post, PostService } from "goodvandro-alganews-sdk";
-import { useEffect, useState } from "react";
+import { useEffect } from "react"
 import styled from "styled-components"
 import withBoundary from "../../core/hoc/withBoundary"
-import confirm from "../../core/utils/confirm";
-import info from "../../core/utils/info";
-import modal from "../../core/utils/modal";
-import Button from '../components/Button/Button';
-import Loading from "../components/Loading";
+import useSinglePost from "../../core/hooks/useSinglePost"
+import confirm from "../../core/utils/confirm"
+import modal from "../../core/utils/modal"
+import Button from '../components/Button/Button'
+import Loading from "../components/Loading"
 import MarkdownEditor from "../components/MarkdownEditor"
 
 interface PostPreviewProps {
@@ -14,16 +13,7 @@ interface PostPreviewProps {
 }
 
 function PostPreview(props: PostPreviewProps) {
-  const [post, setPost] = useState<Post.Detailed>()
-  const [loading, setLoading] = useState(false)
-
-  async function publishPost() {
-    await PostService.publishExistingPost(props.postId)
-    info({
-      title: 'Post publicado',
-      description: 'O post foi publicado com sucesso'
-    })
-  }
+  const { fetchPost, loading, post, publishPost } = useSinglePost();
 
   function reopenModal() {
     modal({
@@ -32,18 +22,12 @@ function PostPreview(props: PostPreviewProps) {
   }
 
   useEffect(() => {
-    setLoading(true)
-    PostService
-      .getExistingPosts(props.postId)
-      .then(setPost)
-      .finally(() => setLoading(false))
-  }, [props.postId])
+    fetchPost(props.postId);
+  }, [fetchPost, props.postId])
 
-  if (loading)
-    return <Loading show />
+  if (loading) return <Loading show />
 
-  if (!post)
-    return null
+  if (!post) return null
 
   return (
     <PostPreviewWrapper>
@@ -68,18 +52,15 @@ function PostPreview(props: PostPreviewProps) {
             variant={'primary'}
             label={'Editar'}
             disabled={post.published}
-            onClick={() => window.location.pathname = `/posts/edit/${props.postId}`}
+            onClick={() =>
+              (window.location.pathname = `/posts/edit/${props.postId}`)
+            }
           />
         </PostPreviewActions>
       </PostPreviewHeading>
-      <PostPreviewImage
-        src={post.imageUrls.medium}
-      />
+      <PostPreviewImage src={post.imageUrls.medium} />
       <PostPreviewContent>
-        <MarkdownEditor
-          readOnly
-          value={post.body}
-        />
+        <MarkdownEditor readOnly value={post.body} />
       </PostPreviewContent>
     </PostPreviewWrapper>
   )

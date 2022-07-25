@@ -11,13 +11,16 @@ export default function useEditors() {
     (state: RootState) => state.editor.editorsList
   )
 
-  const fetchAllEditors = useCallback(async function () {
-    dispatch(EditorActions.fetchAllEditors())
-  }, [dispatch])
+  const fetchAllEditors = useCallback(
+    async function () {
+      dispatch(EditorActions.fetchAllEditors())
+    },
+    [dispatch]
+  )
 
   return {
     loading,
     editorsList,
-    fetchAllEditors
+    fetchAllEditors,
   }
 }

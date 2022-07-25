@@ -1,23 +1,16 @@
-import { Metric, MetricService } from "goodvandro-alganews-sdk";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Skeleton from "react-loading-skeleton";
 import styled from "styled-components";
 import withBoundary from "../../core/hoc/withBoundary";
+import useTopTags from "../../core/hooks/useTopTags";
 import CircleChart from "../components/CircleChart";
 
 function UserTopTags() {
-  const [topTags, setTopTags] = useState<Metric.EditorTagRatio>([])
-  const [error, setError] = useState<Error>()
+  const { topTags, fetchTopTags } = useTopTags();
 
   useEffect(() => {
-    MetricService
-      .getTop3Tags()
-      .then(setTopTags)
-      .catch(error => setError(new Error(error.message)))
-  }, [])
-
-  if (error)
-    throw error
+    fetchTopTags();
+  }, [fetchTopTags]);
 
   if (!topTags.length)
     return <UserTopTagsWrapper>
@@ -27,17 +20,17 @@ function UserTopTags() {
     </UserTopTagsWrapper>
 
   return <UserTopTagsWrapper>
-    {
-      topTags.map((tag, i: number) => {
-        return <CircleChart
+    {topTags.map((tag, i: number) => {
+      return (
+        <CircleChart
           key={i}
           progress={tag.percentage}
           caption={tag.tagName}
           theme={i === 0 ? 'primary' : 'default'}
           size={88}
         />
-      })
-    }
+      )
+    })}
   </UserTopTagsWrapper>
 }
 

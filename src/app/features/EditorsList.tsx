@@ -11,6 +11,7 @@ export default function EditorsList() {
 
   useEffect(() => {
     fetchAllEditors()
+      .finally(() => setError)
   }, [fetchAllEditors])
 
   if (error)
@@ -35,6 +36,7 @@ export default function EditorsList() {
         />
       })
     }
+    {loading ? "buscando mais informações" : null}
   </EditorListWrapper>
 }
 

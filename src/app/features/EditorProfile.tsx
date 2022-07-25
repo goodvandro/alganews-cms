@@ -20,8 +20,7 @@ function EditorProfile(props: EditorProfileProps) {
     fetchEditor(Number(params.id))
   }, [fetchEditor, params.id])
 
-  if (!editor)
-    return null
+  if (!editor) return null
 
   return <EditorProfileWrapper>
     <EditorHeadline>
@@ -55,21 +54,54 @@ function EditorProfile(props: EditorProfileProps) {
         <FieldDescriptor field={'Estado'} value={editor.location.state} />
         {
           !props.hidePersonalData && <>
-            <FieldDescriptor field={'Telefone'} value={'+55 27 99900-9999'} />
-            <FieldDescriptor field={'Email'} value={'ana.castillo@redacao.algacontent.com'} />
-            <FieldDescriptor field={'Nascimento'} value={'26 de Dezembro de 1997 (22 anos)'} />
+            <FieldDescriptor
+              field={'Telefone'}
+              value={'+55 27 99900-9999'}
+            />
+            <FieldDescriptor
+              field={'Email'}
+              value={'ana.castillo@redacao.algacontent.com'}
+            />
+            <FieldDescriptor
+              field={'Nascimento'}
+              value={'26 de Dezembro de 1997 (22 anos)'}
+            />
           </>
         }
       </ContactInfo>
     </EditorFeatures>
     {
       !props.hidePersonalData && <EditorEarnings >
-        <ValueDescriptor color={'default'} value={21452} description={'Palavras nesta semana'} />
-        <ValueDescriptor color={'default'} value={123234} description={'Palavras no mês'} />
-        <ValueDescriptor color={'default'} value={12312312} description={'Total de palavras'} />
-        <ValueDescriptor color={'primary'} value={545623.23} description={'Ganhos na semana'} isCurrency />
-        <ValueDescriptor color={'primary'} value={545623.23} description={'Ganhos no mês'} isCurrency />
-        <ValueDescriptor color={'primary'} value={545623.23} description={'Ganhos no total'} isCurrency />
+        <ValueDescriptor
+          color={'default'}
+          value={21452}
+          description={'Palavras nesta semana'}
+        />
+        <ValueDescriptor
+          color={'default'}
+          value={123234}
+          description={'Palavras no mês'}
+        />
+        <ValueDescriptor
+          color={'default'}
+          value={12312312}
+          description={'Total de palavras'}
+        />
+        <ValueDescriptor
+          color={'primary'}
+          value={545623.23}
+          description={'Ganhos na semana'} isCurrency
+        />
+        <ValueDescriptor
+          color={'primary'}
+          value={545623.23}
+          description={'Ganhos no mês'} isCurrency
+        />
+        <ValueDescriptor
+          color={'primary'}
+          value={545623.23}
+          description={'Ganhos no total'} isCurrency
+        />
       </EditorEarnings>
     }
   </EditorProfileWrapper>

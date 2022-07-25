@@ -1,39 +1,30 @@
 import { mdiOpenInNew } from "@mdi/js"
 import Icon from "@mdi/react"
 import { format } from "date-fns"
+import { Post } from 'goodvandro-alganews-sdk'
 import { useEffect, useMemo, useState } from "react"
+import Skeleton from 'react-loading-skeleton'
 import { Column, usePagination, useTable } from "react-table"
 import withBoundary from "../../core/hoc/withBoundary"
-import Table from "../components/Table/Table"
-import Skeleton from 'react-loading-skeleton'
-import Loading from "../components/Loading"
-import PostPreview from "./PostPreview"
+import usePosts from "../../core/hooks/usePosts"
 import modal from "../../core/utils/modal"
+import Loading from "../components/Loading"
 import PostTitleAnchor from "../components/PostTitleAnchor"
-import { Post, PostService } from 'goodvandro-alganews-sdk';
+import Table from "../components/Table/Table"
+import PostPreview from "./PostPreview"
 
 function PostsList() {
-  const [posts, setPosts] = useState<Post.Paginated>()
-  const [error, setError] = useState<Error>()
+  const { loading, paginatedPosts, fetchPosts } = usePosts();
   const [page, setPage] = useState(0)
-  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
-    setLoading(true)
-    PostService
-      .getAllPosts({
-        page,
-        size: 7,
-        showAll: true,
-        sort: ['createdAt', 'desc']
-      })
-      .then(setPosts)
-      .catch(error => setError(new Error(error.message)))
-      .finally(() => setLoading(false))
-  }, [page])
-
-  if (error)
-    throw error
+    fetchPosts({
+      page,
+      size: 7,
+      showAll: true,
+      sort: ["createdAt", "desc"],
+    })
+  }, [fetchPosts, page])
 
   const columns = useMemo<Column<Post.Summary>[]>(
     () => [
@@ -121,16 +112,16 @@ function PostsList() {
 
   const instance = useTable<Post.Summary>(
     {
-      data: posts?.content || [],
+      data: paginatedPosts?.content || [],
       columns,
       manualPagination: true,
       initialState: { pageIndex: 0 },
-      pageCount: posts?.totalPages,
+      pageCount: paginatedPosts?.totalPages,
     },
     usePagination
   );
 
-  if (!posts)
+  if (!paginatedPosts)
     return <div>
       <Skeleton height={32} />
       <Skeleton height={40} />
