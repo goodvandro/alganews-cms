@@ -1,24 +1,22 @@
-import { getEditorDescription, User, UserService } from 'goodvandro-alganews-sdk';
-import { useEffect, useState } from 'react';
-import Skeleton from 'react-loading-skeleton';
-import styled from "styled-components";
-import Profile from "../components/Profile";
+import { getEditorDescription, User } from 'goodvandro-alganews-sdk'
+import { useEffect, useState } from 'react'
+import Skeleton from 'react-loading-skeleton'
+import styled from 'styled-components'
+import useEditors from '../../core/hooks/useEditors'
+import Profile from '../components/Profile'
 
 export default function EditorsList() {
-  const [editors, setEditors] = useState<User.EditorSummary[]>([]);
+  const { editorsList, loading, fetchAllEditors } = useEditors()
   const [error, setError] = useState<Error>()
 
   useEffect(() => {
-    UserService
-      .getAllEditors()
-      .then(setEditors)
-      .catch(error => setError(new Error(error.message)))
-  }, [])
+    fetchAllEditors()
+  }, [fetchAllEditors])
 
   if (error)
     throw error
 
-  if (!editors.length)
+  if (!editorsList.length)
     return <EditorListWrapper>
       <Skeleton height={82} />
       <Skeleton height={82} />
@@ -27,7 +25,7 @@ export default function EditorsList() {
 
   return <EditorListWrapper>
     {
-      editors.map((editor: User.EditorSummary) => {
+      editorsList.map((editor: User.EditorSummary) => {
         return <Profile
           key={editor.id}
           editorId={editor.id}
