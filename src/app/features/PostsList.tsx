@@ -145,7 +145,7 @@ function PostsList() {
         ),
       },
     ],
-    []
+    [openInNew]
   );
 
   const instance = useTable<Post.Summary>(
