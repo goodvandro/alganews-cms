@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { User, UserService } from "goodvandro-alganews-sdk";
-import { type } from "os";
 
 type PA<T> = PayloadAction<T>;
 

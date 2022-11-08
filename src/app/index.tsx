@@ -1,23 +1,22 @@
+import jwtDecode from "jwt-decode";
 import { useEffect, useMemo } from "react";
 import {
-  BrowserRouter,
   Route,
   Routes,
   useLocation,
-  useNavigate,
+  useNavigate
 } from "react-router-dom";
+import { Authentication } from "../auth/Auth";
+import AuthService from "../auth/Authorization.service";
+import useAuth from "../core/hooks/useAuth";
 import info from "../core/utils/info";
+import Loading from "./components/Loading/Loading";
 import EditorProfileView from "./views/EditorProfile.view";
 import EditorsListView from "./views/EditorsList.view";
 import Home from "./views/Home.view";
 import NotFound404 from "./views/NotFound404.view";
 import PostCreateView from "./views/PostCreate.view";
 import PostEditView from "./views/PostEdit.view";
-import AuthService from "../auth/Authorization.service";
-import { Authentication } from "../auth/Auth";
-import jwtDecode from "jwt-decode";
-import useAuth from "../core/hooks/useAuth";
-import Loading from "./components/Loading/Loading";
 
 export default function App() {
   const navigate = useNavigate();
