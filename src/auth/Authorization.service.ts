@@ -3,6 +3,7 @@ import qs from "qs";
 import pkceChallenge from "pkce-challenge";
 
 const AUTH_SERVER = process.env.REACT_APP_AUTH_SERVER_BASE_URL;
+const BASE_URL = process.env.REACT_APP_BASE_URL;
 
 const authServer = axios.create({
   baseURL: AUTH_SERVER,
@@ -28,7 +29,7 @@ export interface OAuthAuthorizationTokenResponse {
 export default class AuthService {
   public static imperativelySendToLogout() {
     window.localStorage.clear();
-    window.location.href = `${AUTH_SERVER}/logout?redirect=http://localhost:3000`;
+    window.location.href = `${AUTH_SERVER}/logout?redirect=${BASE_URL}`;
   }
 
   public static async getNewToken(config: {
