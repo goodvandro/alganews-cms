@@ -1,11 +1,6 @@
 import jwtDecode from "jwt-decode";
 import { useEffect, useMemo } from "react";
-import {
-  Route,
-  Routes,
-  useLocation,
-  useNavigate
-} from "react-router-dom";
+import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import { Authentication } from "../auth/Auth";
 import AuthService from "../auth/Authorization.service";
 import useAuth from "../core/hooks/useAuth";
@@ -17,6 +12,8 @@ import Home from "./views/Home.view";
 import NotFound404 from "./views/NotFound404.view";
 import PostCreateView from "./views/PostCreate.view";
 import PostEditView from "./views/PostEdit.view";
+
+const APP_BASE_URL = process.env.REACT_APP_BASE_URL;
 
 export default function App() {
   const navigate = useNavigate();
@@ -65,7 +62,7 @@ export default function App() {
           await AuthService.getFirstAccessToken({
             code,
             codeVerifier,
-            redirectUri: "http://localhost:3001/authorize",
+            redirectUri: `${APP_BASE_URL}/authorize`,
           });
 
         AuthService.setAccessToken(access_token);
